@@ -7,41 +7,41 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 
-print(sys.argv)
-
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split(".")
 
 # Path of video
-file = sys.argv[1]
+VIDEO_PATH = sys.argv[1]
 
-name = str(file).split("/")[-1].split(".")[0]
+VIDEO_NAME = str(VIDEO_PATH).split("/")[-1].split(".")[0]
+
+DETECTION_PATH = "../results/"+VIDEO_NAME+".txt"
+
+# Read Result
+DETECTION_RESULT = open(DETECTION_PATH).readline().split(",")
+print(DETECTION_RESULT)
+DETECTION_RESULT = [ int(i) for i in DETECTION_RESULT[0:9]]
+
+frameNO = DETECTION_RESULT[0]
+finger_box = tuple(DETECTION_RESULT[1:5])
+phone_box = tuple(DETECTION_RESULT[5:9])
 
 # Read video
-video = cv2.VideoCapture(str(file))
- 
+video = cv2.VideoCapture(str(VIDEO_PATH))
+
 # Exit if video not opened.
 if not video.isOpened():
     print("Could not open video")
     sys.exit()
  
-# Read first frame.
-ok, frame = video.read()
-if not ok:
-    print('Cannot read video file')
-    sys.exit()
+while frameNO > 0:
+    # Read first frame.
+    ok, frame = video.read()
+    if not ok:
+        print('Cannot read video file')
+        sys.exit()
+    frameNO -= 1
 
-# Box for finger (top-left.x, top-left.y, bottom-right.x, bottom-right.y)
-if len(sys.argv) > 2:
-    finger_box = sys.argv[2]
-else:
-    finger_box = cv2.selectROI(frame, False)
 print(str(finger_box))
-
-# Box for finger (top-left.x, top-left.y, bottom-right.x, bottom-right.y)
-if len(sys.argv) > 3:
-    finger_box = sys.argv[3]
-else:
-    phone_box = cv2.selectROI(frame, False)
 print(str(phone_box))
 
 X = []
@@ -156,7 +156,7 @@ while True:
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break
 
-plt.savefig("../results/"+name+".png")
+plt.savefig("../results/"+VIDEO_NAME+".png")
 
 rows= []
 
@@ -164,7 +164,7 @@ for i in range(len(X)):
     row = {"frame":i,"X":X[i],"Y":-Y[i]}
     rows.append(row)
 
-with open("../results/"+name+".csv","w") as f:
+with open("../results/"+VIDEO_NAME+".csv","w") as f:
     rst_csv = csv.DictWriter(f,["frame","X","Y"])
     rst_csv.writeheader()
     rst_csv.writerows(rows)
