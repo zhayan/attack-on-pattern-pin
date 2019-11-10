@@ -59,7 +59,7 @@ VIDEO_PATH = sys.argv[1]
 
 VIDEO_NAME = str(VIDEO_PATH).split("/")[-1].split(".")[0]
 
-TRACK_PATH = "results/"+VIDEO_NAME+".csv"
+TRACK_PATH = "results/"+VIDEO_NAME+"/track.csv"
 
 data = pd.read_csv(TRACK_PATH)
 xval = data["X"].values
@@ -100,4 +100,4 @@ fig.update_yaxes(autorange="reversed")
 
 fig.show()
 
-fig.write_image("results/"+VIDEO_NAME+".jpeg")
+fig.write_image("results/"+VIDEO_NAME+"/result.png")
