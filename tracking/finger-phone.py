@@ -14,7 +14,7 @@ VIDEO_PATH = sys.argv[1]
 
 VIDEO_NAME = str(VIDEO_PATH).split("/")[-1].split(".")[0]
 
-DETECTION_PATH = "../results/"+VIDEO_NAME+".txt"
+DETECTION_PATH = "results/"+VIDEO_NAME+".txt"
 
 # Read Result
 DETECTION_RESULT = open(DETECTION_PATH).readline().split(",")
@@ -156,7 +156,7 @@ while True:
         k = cv2.waitKey(1) & 0xff
         if k == 27 : break
 
-plt.savefig("../results/"+VIDEO_NAME+".png")
+plt.savefig("results/"+VIDEO_NAME+".png")
 
 rows= []
 
@@ -164,7 +164,7 @@ for i in range(len(X)):
     row = {"frame":i,"X":X[i],"Y":-Y[i]}
     rows.append(row)
 
-with open("../results/"+VIDEO_NAME+".csv","w") as f:
+with open("results/"+VIDEO_NAME+".csv","w") as f:
     rst_csv = csv.DictWriter(f,["frame","X","Y"])
     rst_csv.writeheader()
     rst_csv.writerows(rows)
