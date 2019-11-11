@@ -17,7 +17,7 @@ VIDEO_NAME = str(VIDEO_PATH).split("/")[-1].split(".")[0]
 DETECTION_PATH = "results/"+VIDEO_NAME+"/box.txt"
 
 # Read Result
-DETECTION_RESULT = open(DETECTION_PATH).readline().split(",")
+DETECTION_RESULT = open(DETECTION_PATH).readline().split(" ")
 print(DETECTION_RESULT)
 DETECTION_RESULT = [ int(i) for i in DETECTION_RESULT[0:9]]
 
