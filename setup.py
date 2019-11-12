@@ -3,7 +3,10 @@ import sys
 
 VEDIO_PATH = sys.argv[1]
 
-os.system("python3 ./detection/detection.py " + VEDIO_PATH)
+VIDEO_NAME = str(VIDEO_PATH).split(".")[0]
+
+
+os.system("python3 ./detection/detection.py " + VEDIO_NAME)
 
 os.system("python3 ./tracking/finger-phone.py " + VEDIO_PATH)
 
