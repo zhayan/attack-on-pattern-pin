@@ -149,12 +149,12 @@ while True:
             thick = int(np.sqrt(len(pts) / float(i + 1)) * 1.5)
             cv2.line(frame, pts[i-1],pts[i],(0,0,225),thick)
 
-        cv2.imshow("Tracking", frame)
+       #cv2.imshow("Tracking", frame)
 
         
         # Exit if ESC pressed
-        k = cv2.waitKey(1) & 0xff
-        if k == 27 : break
+       # k = cv2.waitKey(1) & 0xff
+       # if k == 27 : break
 
 plt.savefig("results/"+VIDEO_NAME+"/track.png")
 
