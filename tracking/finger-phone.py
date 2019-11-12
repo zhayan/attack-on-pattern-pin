@@ -19,11 +19,11 @@ DETECTION_PATH = "results/"+VIDEO_NAME+"/box.txt"
 # Read Result
 DETECTION_RESULT = open(DETECTION_PATH).readline().split(" ")
 print(DETECTION_RESULT)
-DETECTION_RESULT = [ int(i) for i in DETECTION_RESULT[0:9]]
+DETECTION_RESULT = [ int(i) for i in DETECTION_RESULT[0:11]]
 
 frameNO = DETECTION_RESULT[0]
-finger_box = tuple(DETECTION_RESULT[1:5])
-phone_box = tuple(DETECTION_RESULT[5:9])
+finger_box = tuple(DETECTION_RESULT[2:6])
+phone_box = tuple(DETECTION_RESULT[7:11])
 
 # Read video
 video = cv2.VideoCapture(str(VIDEO_PATH))
